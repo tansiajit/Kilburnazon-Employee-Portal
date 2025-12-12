@@ -1,0 +1,343 @@
+/* ------------------------------------------
+   GLOBAL
+------------------------------------------- */
+
+body {
+  font-family: "Inter", Arial, sans-serif;
+  background: linear-gradient(145deg, #eef1f5, #dce1e7);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.App {
+  padding: 20px;
+  max-width: 1250px;
+  margin: auto;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ------------------------------------------
+   TITLE
+------------------------------------------- */
+
+.employee-directory h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #222;
+  font-weight: 700;
+  letter-spacing: 1px;
+  animation: slideDown 0.5s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ------------------------------------------
+   FILTER BAR (Glassmorphism + Animations)
+------------------------------------------- */
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(14px) saturate(180%);
+  -webkit-backdrop-filter: blur(14px) saturate(180%);
+  
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+
+  margin-bottom: 22px;
+  animation: fadeIn 0.6s ease;
+}
+
+.filters input[type="text"],
+.filters input[type="date"],
+.filters select {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d0d0d0;
+  background: rgba(255,255,255,0.8);
+  font-size: 14px;
+  min-width: 180px;
+  outline: none;
+  transition: border 0.25s ease, box-shadow 0.25s ease, transform 0.15s ease;
+}
+
+.filters input:focus,
+.filters select:focus {
+  border-color: #4b8bff;
+  box-shadow: 0 0 8px rgba(80, 133, 255, 0.4);
+  transform: scale(1.02);
+}
+
+/* Reset button */
+.filters button {
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #4068ff, #5a7bff);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.filters button:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #3357e6, #5877ff);
+  box-shadow: 0 4px 10px rgba(50, 80, 200, 0.25);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .filters input,
+  .filters select,
+  .filters button {
+    width: 100%;
+  }
+}
+
+/* ------------------------------------------
+   EMPLOYEE GRID
+------------------------------------------- */
+
+.employee-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 18px;
+  margin-top: 20px;
+}
+
+/* ------------------------------------------
+   EMPLOYEE CARD (Animated + Glass Hover)
+------------------------------------------- */
+
+.employee-card {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(10px);
+  padding: 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.35);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  cursor: pointer;
+
+  transition: 
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.employee-card:hover {
+  transform: translateY(-6px);
+  background: rgba(255,255,255,0.92);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+/* ------------------------------------------
+   MODAL OVERLAY
+------------------------------------------- */
+
+.employee-modal {
+  position: fixed;
+  top: 0; left: 0; right:0; bottom:0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  animation: fadeIn 0.3s ease;
+}
+
+/* Modal Box (Glass styling) */
+.employee-modal-content {
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(12px);
+  padding: 30px;
+  border-radius: 14px;
+  width: 520px;
+  max-width: 90%;
+  border: 1px solid rgba(255,255,255,0.45);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+
+  animation: scaleIn 0.3s ease;
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ------------------------------------------
+   BUTTONS
+------------------------------------------- */
+
+button {
+  cursor: pointer;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #007bff;
+  color: white;
+  font-size: 14px;
+  transition: 0.25s ease;
+}
+
+button:hover {
+  background: #005ed6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 95, 230, 0.25);
+}
+
+/* Inputs globally */
+input, select {
+  font-family: inherit;
+}
+
+/* ------------------------------------------
+   EMPLOYEE MANAGEMENT PAGE (Form & Inputs)
+------------------------------------------- */
+
+.employee-management {
+  max-width: 650px;
+  margin: auto;
+  padding: 10px;
+}
+
+.employee-management form {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.employee-management form:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.15);
+}
+
+.employee-management form h2 {
+  margin-bottom: 15px;
+  color: #222;
+  font-size: 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 5px;
+  text-align: center;
+}
+
+.employee-management form label {
+  display: block;
+  margin: 10px 0 4px;
+  font-weight: 600;
+  color: #111;
+}
+
+.employee-management form input,
+.employee-management form select {
+  width: 100%;
+  padding: 10px 12px;
+  margin: 6px 0 12px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.25);
+  color: #111;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.employee-management form input:focus,
+.employee-management form select:focus {
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(1.02);
+  box-shadow: 0 0 8px rgba(80, 133, 255, 0.4);
+}
+
+/* Buttons inside form */
+.employee-management form button {
+  cursor: pointer;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 10px;
+  background: #007bff;
+  color: white;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.employee-management form button:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 95, 230, 0.25);
+}
+
+/* Error message styling */
+.employee-management .error {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Emergency contact section */
+.employee-management form label input[type="checkbox"] {
+  width: auto;
+  margin-right: 6px;
+}
+
+.employee-management form .emergency-section {
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.employee-management form .emergency-section input {
+  background: rgba(255, 255, 255, 0.2);
+  margin-bottom: 10px;
+}
+
+/* Conditional hint for salary */
+.employee-management form .salary-hint {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: #555;
+  margin-top: -8px;
+  margin-bottom: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .employee-management form {
+    padding: 15px;
+  }
+
+  .employee-management form input,
+  .employee-management form select {
+    padding: 8px 10px;
+  }
+
+  .employee-management form button {
+    width: 100%;
+  }
+}
